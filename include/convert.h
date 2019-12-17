@@ -52,34 +52,14 @@
 
 namespace velodyne_pointcloud
 {
-    struct CloudConfig{
-        double min_range;
-        double max_range;
-        double view_direction;
-        double view_width;
-        bool organize_cloud;
-
-
-    };
 
 class Convert
 {
   public:
     Convert();
     ~Convert() {}
-    void setConfigFile(std::string file, double max_range, double min_range);
-
-
+    void setConfigFile(std::string file, double max_range, double min_range, bool organize_cloud);
     const sensor_msgs::PointCloud2 processScan(const velodyne_msgs::VelodyneScan::ConstPtr &scanMsg);
-private:
-
-    boost::shared_ptr<velodyne_rawdata::RawData> data_;
-
-
-    boost::shared_ptr<velodyne_rawdata::DataContainerBase> container_ptr_;
-
-    boost::mutex reconfigure_mtx_;
-
     /// configuration parameters
     typedef struct
     {
@@ -93,6 +73,13 @@ private:
     }
     Config;
     Config config_;
+private:
+
+    boost::shared_ptr<velodyne_rawdata::RawData> data_;
+
+    boost::shared_ptr<velodyne_rawdata::DataContainerBase> container_ptr_;
+
+    boost::mutex reconfigure_mtx_;
     bool first_rcfg_call;
     std::string calibFile;
 

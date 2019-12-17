@@ -50,7 +50,7 @@ namespace velodyne_driver {
         std::string dump_file;
         dump_file = pcapfile;
         config_.model =modelname;
-        this->converter.setConfigFile(calibfile, range.second, range.first);
+        this->converter.setConfigFile(calibfile, range.second, range.first, false);
 
         config_.rpm = 600.0;
         double cut_angle;
@@ -137,12 +137,13 @@ namespace velodyne_driver {
  *  @returns true unless end of file reached
  */
     bool VelodyneDriver::poll(sensor_msgs::PointCloud2 &cloud) {
-        if (!config_.enabled) {
-            // If we are not enabled exit once a second to let the caller handle
-            // anything it might need to, such as if it needs to exit.
-            ros::Duration(1).sleep();
-            return true;
-        }
+//        if (!config_.enabled) {
+//            // If we are not enabled exit once a second to let the caller handle
+//            // anything it might need to, such as if it needs to exit.
+//            ros::Duration(1).sleep();
+//            return true;        dvr("VLP16", "/home/mini/Project/velodyneDriver/VLP16db.yaml")
+
+//        }
 
         // Allocate a new shared pointer for zero-copy sharing with other nodelets.
         velodyne_msgs::VelodyneScanPtr scan(new velodyne_msgs::VelodyneScan);

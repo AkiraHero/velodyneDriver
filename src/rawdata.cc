@@ -335,8 +335,8 @@ namespace velodyne_rawdata {
                 // some packets contain an angle overflow where azimuth_diff < 0
                 if (raw_azimuth_diff < 0)//raw->blocks[block+1].rotation - raw->blocks[block].rotation < 0)
                 {
-                    printf("Packet containing angle overflow, raw_azimuth_diff:%f, first angle: %f  second angle: %f\n" ,
-                            raw_azimuth_diff,raw->blocks[block].rotation ,raw->blocks[block + 1].rotation);
+                    //printf("Packet containing angle overflow, raw_azimuth_diff:%f, first angle: %f  second angle: %f\n" ,
+                     //       raw_azimuth_diff,raw->blocks[block].rotation ,raw->blocks[block + 1].rotation);
                     // if last_azimuth_diff was not zero, we can assume that the velodyne's speed did not change very much and use the same difference
                     if (last_azimuth_diff > 0) {
                         azimuth_diff = last_azimuth_diff;

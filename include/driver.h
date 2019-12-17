@@ -48,6 +48,7 @@ public:
   ~VelodyneDriver() {}
 
   bool poll(sensor_msgs::PointCloud2 &cloud);
+    velodyne_pointcloud::Convert converter;
 
 private:
 
@@ -67,7 +68,7 @@ private:
   boost::shared_ptr<Input> input_;
 
   int last_azimuth_;
-  velodyne_pointcloud::Convert converter;
+
 
 };
 

@@ -26,7 +26,8 @@ namespace velodyne_pointcloud {
 
     }
 
-    void Convert::setConfigFile(std::string file, double max_range, double min_range) {
+    void Convert::setConfigFile(std::string file, double max_range, double min_range, bool organize_cloud) {
+        config_.organize_cloud = organize_cloud;
         this->calibFile = file;
         boost::optional<velodyne_pointcloud::Calibration> calibration = data_->setup(this->calibFile);
         if (calibration) {
@@ -37,11 +38,14 @@ namespace velodyne_pointcloud {
         }
 
         if (config_.organize_cloud) {
+            std::cout << "====!using organ!!!!!!!!!"<<std::endl;
             container_ptr_ = boost::shared_ptr<OrganizedCloudXYZIR>(
                     new OrganizedCloudXYZIR(config_.max_range, config_.min_range,
                                             config_.target_frame, config_.fixed_frame,
                                             config_.num_lasers, data_->scansPerPacket()));
         } else {
+            std::cout << "====!using non organ"<<std::endl;
+
             container_ptr_ = boost::shared_ptr<PointcloudXYZIR>(
                     new PointcloudXYZIR(config_.max_range, config_.min_range,
                                         config_.target_frame, config_.fixed_frame,

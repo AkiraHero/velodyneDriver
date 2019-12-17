@@ -5,8 +5,8 @@ set(CMAKE_BUILD_TYPE "Debug")
 
 
 #Set Python Path for catkin
-set(PYTHON_EXECUTABLE /usr/bin/python3.5)
-set(PYTHONPATH /usr/local/lib/python3.5/dist-packages)
+#set(PYTHON_EXECUTABLE /usr/bin/python3.5)
+#set(PYTHONPATH /usr/local/lib/python3.5/dist-packages)
 
 
 # Set minimum C++ standard to C++11
@@ -25,11 +25,11 @@ set(${PROJECT_NAME}_CATKIN_DEPS
     )
 
 find_package(catkin REQUIRED COMPONENTS ${${PROJECT_NAME}_CATKIN_DEPS})
-find_package(OpenCV 3.0 REQUIRED)
+find_package(OpenCV  REQUIRED)
 
 # This driver uses Boost threads
 find_package(Boost REQUIRED COMPONENTS thread)
-find_package(Eigen3)
+#find_package(Eigen3)
 
 # libpcap provides no pkg-config or find_package module:
 set(libpcap_LIBRARIES -lpcap)
@@ -37,7 +37,7 @@ set(libpcap_LIBRARIES -lpcap)
 include_directories(include
         ${Boost_INCLUDE_DIR}
         ${catkin_INCLUDE_DIRS}
-        ${EIGEN3_INCLUDE_DIR}
+        /usr/include/eigen3
         )
 
 
@@ -84,3 +84,6 @@ target_link_libraries(testdriver
         velodyne_driver
         ${OpenCV_LIBRARIES}
 )
+
+set(CMAKE_INSTALL_PREFIX /usr/local/lib)
+install(TARGETS velodyne_driver DESTINATION /usr/local/lib)
